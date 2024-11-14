@@ -1,5 +1,7 @@
 {
-    "policies": {
-      "DisablePrivateBrowsing": true
-    }
+  "policies": {
+    "DisablePrivateBrowsing": true,
+    "DisableForgetButton": true,
+    "SanitizeOnShutdown": false
+  }
 }
