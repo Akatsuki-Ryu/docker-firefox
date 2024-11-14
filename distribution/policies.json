@@ -2,6 +2,8 @@
   "policies": {
     "DisablePrivateBrowsing": true,
     "DisableForgetButton": true,
-    "SanitizeOnShutdown": false
+    "SanitizeOnShutdown": false,
+    "DisableHistory": true,
+    "BlockAboutConfig": true
   }
 }
