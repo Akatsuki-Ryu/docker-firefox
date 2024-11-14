@@ -9,9 +9,13 @@ LABEL maintainer="thelamer"
 
 # title
 ENV TITLE=Firefox
+ENV DOCKER_MODS=linuxserver/mods:universal-package-install
+ENV INSTALL_PACKAGES=fonts-noto-cjk
 
 # prevent Ubuntu's firefox stub from being installed
 COPY /root/etc/apt/preferences.d/firefox-no-snap /etc/apt/preferences.d/firefox-no-snap
+# disable private browsing
+COPY /distribution/policies.json /usr/lib/firefox/distribution/policies.json
 
 RUN \
   echo "**** add icon ****" && \
@@ -37,6 +41,12 @@ RUN \
   echo 'pref("datareporting.healthreport.uploadEnabled", false);' >> ${FIREFOX_SETTING} && \
   echo 'pref("trailhead.firstrun.branches", "nofirstrun-empty");' >> ${FIREFOX_SETTING} && \
   echo 'pref("browser.aboutwelcome.enabled", false);' >> ${FIREFOX_SETTING} && \
+  # dark mode
+  echo 'pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org");' >> ${FIREFOX_SETTING} && \
+  echo 'pref("browser.theme.toolbar-theme", 1);' >> ${FIREFOX_SETTING} && \
+  echo 'pref("browser.theme.content-theme", 1);' >> ${FIREFOX_SETTING} && \
+  echo 'pref("browser.in-content.dark-theme", true);' >> ${FIREFOX_SETTING} && \
+
   echo "**** cleanup ****" && \
   rm -rf \
     /tmp/*
